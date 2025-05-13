@@ -7,35 +7,27 @@ const verifyState = require('../middleware/verifyState');
 router.route('/')
     .get(statesController.getAllStates);
 
-// GET /states/:state
-router.route('/:state')
-    .get(verifyState, statesController.getState);
-
-// GET /states/:state/capital
+// More specific GET routes first
 router.route('/:state/capital')
     .get(verifyState, statesController.getCapital);
 
-// GET /states/:state/nickname
 router.route('/:state/nickname')
     .get(verifyState, statesController.getNickname);
 
-// GET /states/:state/population
 router.route('/:state/population')
     .get(verifyState, statesController.getPopulation);
 
-// GET /states/:state/admission
 router.route('/:state/admission')
     .get(verifyState, statesController.getAdmission);
 
-// GET /states/:state/funfact
 router.route('/:state/funfact')
-    .get(verifyState, statesController.getRandomFunFact);
-
-module.exports = router;
-
-// POST / PATCH / DELETE /states/:state/funfact
-router.route('/:state/funfact')
+    .get(verifyState, statesController.getRandomFunFact)
     .post(verifyState, statesController.createFunFact)
     .patch(verifyState, statesController.updateFunFact)
     .delete(verifyState, statesController.deleteFunFact);
 
+// Least specific (must come last!)
+router.route('/:state')
+    .get(verifyState, statesController.getState);
+
+module.exports = router;

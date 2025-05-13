@@ -21,7 +21,7 @@ console.log('Attempting to connect to MongoDB...');
 // Middleware
 app.use(logger); // log events
 app.use(credentials); // handle credential headers for CORS
-app.use(cors(corsOptions)); // enable CORS
+app.use(cors()); // enable CORS
 app.use(express.urlencoded({ extended: false })); // form data
 app.use(express.json()); // json data
 app.use('/', express.static(path.join(__dirname, '/public'))); // serve static files
